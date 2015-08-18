@@ -1,0 +1,312 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Tvbrowser-looks-cvs] develop01/src/main/jgoodieslooksplugin ConfigureTab.java,1.7,1.8 Resources.java,1.8,1.9 Configuration.java,1.7,1.8
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/tvbrowser-looks-cvs/2005-August/index.html" >
+   <LINK REL="made" HREF="mailto:tvbrowser-looks-cvs%40lists.berlios.de?Subject=Re%3A%20%5BTvbrowser-looks-cvs%5D%20develop01/src/main/jgoodieslooksplugin%20ConfigureTab.java%2C1.7%2C1.8%20Resources.java%2C1.8%2C1.9%20Configuration.java%2C1.7%2C1.8&In-Reply-To=%3C200508232155.j7NLtA603032%40bat.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000003.html">
+   <LINK REL="Next"  HREF="000005.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Tvbrowser-looks-cvs] develop01/src/main/jgoodieslooksplugin ConfigureTab.java,1.7,1.8 Resources.java,1.8,1.9 Configuration.java,1.7,1.8</H1>
+    <B>emsker</B> 
+    <A HREF="mailto:tvbrowser-looks-cvs%40lists.berlios.de?Subject=Re%3A%20%5BTvbrowser-looks-cvs%5D%20develop01/src/main/jgoodieslooksplugin%20ConfigureTab.java%2C1.7%2C1.8%20Resources.java%2C1.8%2C1.9%20Configuration.java%2C1.7%2C1.8&In-Reply-To=%3C200508232155.j7NLtA603032%40bat.berlios.de%3E"
+       TITLE="[Tvbrowser-looks-cvs] develop01/src/main/jgoodieslooksplugin ConfigureTab.java,1.7,1.8 Resources.java,1.8,1.9 Configuration.java,1.7,1.8">nobody at sheep.berlios.de
+       </A><BR>
+    <I>Tue Aug 23 23:55:10 CEST 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000003.html">[Tvbrowser-looks-cvs] develop01/src/resource/jgoodieslooksplugin jgoodieslooksplugin_de.properties,1.3,1.4 jgoodieslooksplugin.properties,1.2,1.3
+</A></li>
+        <LI>Next message: <A HREF="000005.html">[Tvbrowser-looks-cvs] develop01/src/resource/jgoodieslooksplugin jgoodieslooksplugin_de.properties,1.4,1.5 jgoodieslooksplugin.properties,1.3,1.4
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4">[ date ]</a>
+              <a href="thread.html#4">[ thread ]</a>
+              <a href="subject.html#4">[ subject ]</a>
+              <a href="author.html#4">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Update of /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin
+In directory sheep:/tmp/cvs-serv11131/src/main/jgoodieslooksplugin
+
+Modified Files:
+	ConfigureTab.java Resources.java Configuration.java 
+Log Message:
+- build configuration UI via JGoodies forms
+- apply L&amp;F changes for (nearly) all TVBrowser 
+  UI components without restart
+
+Index: ConfigureTab.java
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin/ConfigureTab.java,v
+retrieving revision 1.7
+retrieving revision 1.8
+diff -C2 -d -r1.7 -r1.8
+*** ConfigureTab.java	20 Aug 2005 12:43:13 -0000	1.7
+--- ConfigureTab.java	23 Aug 2005 21:55:07 -0000	1.8
+***************
+*** 5,23 ****
+  package jgoodieslooksplugin;
+  
+! import java.awt.BorderLayout;
+! 
+! import javax.swing.BorderFactory;
+! import javax.swing.Icon;
+! import javax.swing.ImageIcon;
+! import javax.swing.JCheckBox;
+! import javax.swing.JComboBox;
+! import javax.swing.JLabel;
+! import javax.swing.JPanel;
+! import javax.swing.LookAndFeel;
+! import javax.swing.SpringLayout;
+  import javax.swing.plaf.metal.MetalTheme;
+  
+  import util.ui.ImageUtilities;
+  
+  import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
+  import com.jgoodies.looks.plastic.PlasticLookAndFeel;
+--- 5,16 ----
+  package jgoodieslooksplugin;
+  
+! import javax.swing.*;
+  import javax.swing.plaf.metal.MetalTheme;
+  
+  import util.ui.ImageUtilities;
+  
++ import com.jgoodies.forms.builder.PanelBuilder;
++ import com.jgoodies.forms.layout.CellConstraints;
++ import com.jgoodies.forms.layout.FormLayout;
+  import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
+  import com.jgoodies.looks.plastic.PlasticLookAndFeel;
+***************
+*** 39,43 ****
+      private JComboBox lafChoice, themeChoice;
+      private JCheckBox looksEnabled, dropShadow;
+!     private JLabel lafLabel, themeLabel, noteLabel;
+      private boolean initilized = false;
+  
+--- 32,36 ----
+      private JComboBox lafChoice, themeChoice;
+      private JCheckBox looksEnabled, dropShadow;
+!     private JPanel settingsPanel;
+      private boolean initilized = false;
+  
+***************
+*** 79,84 ****
+          lafChoice = new JComboBox(lafs);
+          lafChoice.setRenderer(new ComboBoxLafRenderer());
+-         lafLabel = new JLabel(Resources.LABEL_LAF);
+-         lafLabel.setLabelFor(lafChoice);
+          String selectedLaf = config.getLaf().getName();
+          for (int i = 0; i &lt; lafs.length; i++) {
+--- 72,75 ----
+***************
+*** 91,96 ****
+          themeChoice = new JComboBox(themes);
+          themeChoice.setRenderer(new ComboBoxThemeRenderer());
+-         themeLabel = new JLabel(Resources.LABEL_THEME);
+-         themeLabel.setLabelFor(themeChoice);
+          String selectedTheme = config.getTheme().getName();
+          for (int i = 0; i &lt; themes.length; i++) {
+--- 82,85 ----
+***************
+*** 103,108 ****
+          dropShadow = new JCheckBox(Resources.LABEL_DROP_SHADOW);
+          dropShadow.setSelected(config.isPopupDropShadowEnabled());
+- 
+-         noteLabel = new JLabel(Resources.LABEL_NOTE);
+      }
+  
+--- 92,95 ----
+***************
+*** 117,150 ****
+              initComponents();
+  
+!             JPanel choices = new JPanel();
+!             choices.setBorder(BorderFactory.createTitledBorder(Resources.NAME));
+!             choices.setLayout(new SpringLayout());
+! 
+!             choices.add(new JLabel());
+!             choices.add(looksEnabled);
+! 
+!             choices.add(lafLabel);
+!             choices.add(lafChoice);
+! 
+!             choices.add(themeLabel);
+!             choices.add(themeChoice);
+! 
+!             choices.add(new JLabel());
+!             choices.add(dropShadow);
+! 
+!             SpringUtilities.makeCompactGrid(choices, 4, 2, // rows, cols
+!                 6, 6, // initX, initY
+!                 6, 6); // xPad, yPad
+! 
+!             setLayout(new BorderLayout());
+! 
+!             add(choices, BorderLayout.NORTH);
+! 
+!             JPanel note = new JPanel();
+!             note.setBorder(BorderFactory.createTitledBorder(&quot;&quot;));
+!             note.add(noteLabel);
+!             add(note, BorderLayout.SOUTH);
+          }
+!         return this;
+      }
+  
+--- 104,129 ----
+              initComponents();
+  
+!             FormLayout layout = new FormLayout(&quot;pref, 4dlu, pref&quot;,
+!                 &quot;pref, 2dlu, pref, 2dlu, pref, 2dlu, pref, 2dlu, pref&quot;);
+!             PanelBuilder builder = new PanelBuilder(layout);
+!             builder.setDefaultDialogBorder();
+!             CellConstraints cc = new CellConstraints();
+!             
+!             builder.addSeparator(Resources.NAME,    cc.xyw(1, 1, 3));
+!             
+!             builder.add(looksEnabled,               cc.xy(3, 3));
+!             
+!             builder.addLabel(Resources.LABEL_LAF,   cc.xy(1, 5));
+!             builder.add(lafChoice,                  cc.xy(3, 5));
+!             
+!             builder.addLabel(Resources.LABEL_THEME, cc.xy(1, 7));
+!             builder.add(themeChoice,                cc.xy(3, 7));
+!             
+!             builder.add(dropShadow,                 cc.xy(3, 9));
+!             
+!             settingsPanel = builder.getPanel();
+          }
+! 
+!         return settingsPanel;
+      }
+  
+***************
+*** 154,157 ****
+--- 133,143 ----
+          config.setTheme((PlasticTheme) themeChoice.getSelectedItem());
+          config.setPopupDropShadow(dropShadow.isSelected());
++         config.activateLaf();
++         SwingUtilities.invokeLater(new Runnable() {
++ 
++             public void run() {
++                 SwingUtilities.updateComponentTreeUI(createSettingsPanel());
++             }
++         });
+      }
+  
+
+Index: Resources.java
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin/Resources.java,v
+retrieving revision 1.8
+retrieving revision 1.9
+diff -C2 -d -r1.8 -r1.9
+*** Resources.java	21 Aug 2005 21:25:05 -0000	1.8
+--- Resources.java	23 Aug 2005 21:55:07 -0000	1.9
+***************
+*** 30,37 ****
+      static final String LABEL_THEME = mLocalizer.msg(&quot;labelTheme&quot;, &quot;Theme:&quot;);
+      static final String LABEL_DROP_SHADOW = mLocalizer.msg(&quot;labelDropShadow&quot;, &quot;Popup Menu Drop Shadow&quot;);
+-     static final String LABEL_NOTE = mLocalizer.msg(&quot;labelNote&quot;, &quot;&lt;html&gt;&lt;b&gt;ATTENTION:&lt;/b&gt; Changing above settings will require&lt;br&gt;a restart of TV-Browser to apply changes.&lt;/html&gt;&quot;);
+  
+      static final PluginInfo PLUGIN_INFO = new PluginInfo(TITLE, DESC, AUTHOR,
+!         new Version(0, 6), LICENSE);
+  
+  }
+--- 30,36 ----
+      static final String LABEL_THEME = mLocalizer.msg(&quot;labelTheme&quot;, &quot;Theme:&quot;);
+      static final String LABEL_DROP_SHADOW = mLocalizer.msg(&quot;labelDropShadow&quot;, &quot;Popup Menu Drop Shadow&quot;);
+  
+      static final PluginInfo PLUGIN_INFO = new PluginInfo(TITLE, DESC, AUTHOR,
+!         new Version(0, 7), LICENSE);
+  
+  }
+
+Index: Configuration.java
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin/Configuration.java,v
+retrieving revision 1.7
+retrieving revision 1.8
+diff -C2 -d -r1.7 -r1.8
+*** Configuration.java	20 Aug 2005 12:43:13 -0000	1.7
+--- Configuration.java	23 Aug 2005 21:55:07 -0000	1.8
+***************
+*** 8,14 ****
+--- 8,17 ----
+  
+  import javax.swing.LookAndFeel;
++ import javax.swing.SwingUtilities;
+  import javax.swing.UIManager;
+  import javax.swing.UnsupportedLookAndFeelException;
+  
++ import tvbrowser.ui.mainframe.MainFrame;
++ 
+  import com.jgoodies.looks.LookUtils;
+  import com.jgoodies.looks.Options;
+***************
+*** 88,91 ****
+--- 91,95 ----
+                  ClassLoader pluginLoader = getLaf().getClass().getClassLoader();
+                  UIManager.getDefaults().put(&quot;ClassLoader&quot;, pluginLoader);
++                 updateCompleteUI();
+              } catch (UnsupportedLookAndFeelException e) {
+                  e.printStackTrace();
+***************
+*** 95,98 ****
+--- 99,103 ----
+                  try {
+                      UIManager.setLookAndFeel(otherLaf);
++                     updateCompleteUI();
+                  } catch (UnsupportedLookAndFeelException e) {
+                      e.printStackTrace();
+***************
+*** 102,105 ****
+--- 107,119 ----
+          }
+  
++     }
++     
++     private void updateCompleteUI() {
++         SwingUtilities.invokeLater(new Runnable() {
++ 
++             public void run() {
++                 SwingUtilities.updateComponentTreeUI(MainFrame.getInstance());
++             }
++         });
+      }
+  
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000003.html">[Tvbrowser-looks-cvs] develop01/src/resource/jgoodieslooksplugin jgoodieslooksplugin_de.properties,1.3,1.4 jgoodieslooksplugin.properties,1.2,1.3
+</A></li>
+	<LI>Next message: <A HREF="000005.html">[Tvbrowser-looks-cvs] develop01/src/resource/jgoodieslooksplugin jgoodieslooksplugin_de.properties,1.4,1.5 jgoodieslooksplugin.properties,1.3,1.4
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4">[ date ]</a>
+              <a href="thread.html#4">[ thread ]</a>
+              <a href="subject.html#4">[ subject ]</a>
+              <a href="author.html#4">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/tvbrowser-looks-cvs">More information about the Tvbrowser-looks-cvs
+mailing list</a><br>
+</body></html>

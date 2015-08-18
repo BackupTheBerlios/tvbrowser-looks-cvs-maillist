@@ -1,0 +1,1736 @@
+From nobody at sheep.berlios.de  Sat Aug 20 14:43:15 2005
+From: nobody at sheep.berlios.de (emsker)
+Date: Sat, 20 Aug 2005 14:43:15 +0200
+Subject: [Tvbrowser-looks-cvs] develop01/src/main/jgoodieslooksplugin ComboBoxLafRenderer.java,1.2,1.3 JGoodiesLooksPlugin.java,1.5,1.6 ComboBoxThemeRenderer.java,1.2,1.3 ConfigureTab.java,1.6,1.7 Resources.java,1.6,1.7 Configuration.java,1.6,1.7 LabelListCellRenderer.java,1.4,1.5
+Message-ID: <200508201243.j7KChF628399@bat.berlios.de>
+
+Update of /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin
+In directory sheep:/tmp/cvs-serv32219/src/main/jgoodieslooksplugin
+
+Modified Files:
+	ComboBoxLafRenderer.java JGoodiesLooksPlugin.java 
+	ComboBoxThemeRenderer.java ConfigureTab.java Resources.java 
+	Configuration.java LabelListCellRenderer.java 
+Log Message:
+apply coding conventions, format source, org imports
+(coding conventions not published yet)
+
+Index: ComboBoxLafRenderer.java
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin/ComboBoxLafRenderer.java,v
+retrieving revision 1.2
+retrieving revision 1.3
+diff -C2 -d -r1.2 -r1.3
+*** ComboBoxLafRenderer.java	16 Aug 2005 20:37:18 -0000	1.2
+--- ComboBoxLafRenderer.java	20 Aug 2005 12:43:13 -0000	1.3
+***************
+*** 9,14 ****
+  /**
+   * Renderer for LookAndFeel Combobox entries.
+!  *
+!  * @author  Martin Skopp
+   * @version $Revision$
+   */
+--- 9,14 ----
+  /**
+   * Renderer for LookAndFeel Combobox entries.
+!  * 
+!  * @author Martin Skopp
+   * @version $Revision$
+   */
+***************
+*** 18,22 ****
+          return ((LookAndFeel) value).getName();
+      }
+- 
+  
+      protected String getToolTipText(Object value) {
+--- 18,21 ----
+
+Index: JGoodiesLooksPlugin.java
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin/JGoodiesLooksPlugin.java,v
+retrieving revision 1.5
+retrieving revision 1.6
+diff -C2 -d -r1.5 -r1.6
+*** JGoodiesLooksPlugin.java	16 Aug 2005 20:56:28 -0000	1.5
+--- JGoodiesLooksPlugin.java	20 Aug 2005 12:43:13 -0000	1.6
+***************
+*** 19,37 ****
+  /**
+   * The plugin itself.
+!  *
+!  * @author  Martin Skopp
+   * @version $Revision$
+   */
+  public class JGoodiesLooksPlugin extends Plugin {
+- 	
+- 	private Configuration config;
+- 	private ConfigureTab tab;
+  
+! 	public PluginInfo getInfo() {
+          return Resources.PLUGIN_INFO;
+!     } 
+  
+! 	public SettingsTab getSettingsTab() {
+! 	    if (tab == null) {
+              tab = new ConfigureTab(config);
+          }
+--- 19,37 ----
+  /**
+   * The plugin itself.
+!  * 
+!  * @author Martin Skopp
+   * @version $Revision$
+   */
+  public class JGoodiesLooksPlugin extends Plugin {
+  
+!     private Configuration config;
+!     private ConfigureTab tab;
+! 
+!     public PluginInfo getInfo() {
+          return Resources.PLUGIN_INFO;
+!     }
+  
+!     public SettingsTab getSettingsTab() {
+!         if (tab == null) {
+              tab = new ConfigureTab(config);
+          }
+***************
+*** 42,50 ****
+          return config.getProperties();
+      }
+!     
+! 	public void loadSettings(Properties props) {
+! 	    config = new Configuration(props);
+! 	    config.activateLaf();
+! 	}
+  
+      public static void main(String[] args) {
+--- 42,50 ----
+          return config.getProperties();
+      }
+! 
+!     public void loadSettings(Properties props) {
+!         config = new Configuration(props);
+!         config.activateLaf();
+!     }
+  
+      public static void main(String[] args) {
+***************
+*** 56,60 ****
+          config.setTheme(new Silver());
+          plugin.loadSettings(config.getProperties());
+!         final SettingsTab s = plugin.getSettingsTab();  
+          f.addWindowListener(new WindowAdapter() {
+  
+--- 56,60 ----
+          config.setTheme(new Silver());
+          plugin.loadSettings(config.getProperties());
+!         final SettingsTab s = plugin.getSettingsTab();
+          f.addWindowListener(new WindowAdapter() {
+  
+
+Index: ComboBoxThemeRenderer.java
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin/ComboBoxThemeRenderer.java,v
+retrieving revision 1.2
+retrieving revision 1.3
+diff -C2 -d -r1.2 -r1.3
+*** ComboBoxThemeRenderer.java	16 Aug 2005 20:37:18 -0000	1.2
+--- ComboBoxThemeRenderer.java	20 Aug 2005 12:43:13 -0000	1.3
+***************
+*** 9,22 ****
+  /**
+   * Renderer for LookAndFeel-Themes Combobox entries.
+!  *
+!  * @author  Martin Skopp
+   * @version $Revision$
+   */
+  class ComboBoxThemeRenderer extends LabelListCellRenderer {
+!     
+      protected String getText(Object value) {
+          return ((PlasticTheme) value).getName();
+      }
+- 
+  
+      protected String getToolTipText(Object value) {
+--- 9,21 ----
+  /**
+   * Renderer for LookAndFeel-Themes Combobox entries.
+!  * 
+!  * @author Martin Skopp
+   * @version $Revision$
+   */
+  class ComboBoxThemeRenderer extends LabelListCellRenderer {
+! 
+      protected String getText(Object value) {
+          return ((PlasticTheme) value).getName();
+      }
+  
+      protected String getToolTipText(Object value) {
+
+Index: ConfigureTab.java
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin/ConfigureTab.java,v
+retrieving revision 1.6
+retrieving revision 1.7
+diff -C2 -d -r1.6 -r1.7
+*** ConfigureTab.java	18 Aug 2005 07:26:19 -0000	1.6
+--- ConfigureTab.java	20 Aug 2005 12:43:13 -0000	1.7
+***************
+*** 7,17 ****
+  import java.awt.BorderLayout;
+  
+! import javax.swing.*;
+  import javax.swing.plaf.metal.MetalTheme;
+  
+  import util.ui.ImageUtilities;
+  
+- import devplugin.SettingsTab;
+- 
+  import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
+  import com.jgoodies.looks.plastic.PlasticLookAndFeel;
+--- 7,23 ----
+  import java.awt.BorderLayout;
+  
+! import javax.swing.BorderFactory;
+! import javax.swing.Icon;
+! import javax.swing.ImageIcon;
+! import javax.swing.JCheckBox;
+! import javax.swing.JComboBox;
+! import javax.swing.JLabel;
+! import javax.swing.JPanel;
+! import javax.swing.LookAndFeel;
+! import javax.swing.SpringLayout;
+  import javax.swing.plaf.metal.MetalTheme;
+  
+  import util.ui.ImageUtilities;
+  
+  import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
+  import com.jgoodies.looks.plastic.PlasticLookAndFeel;
+***************
+*** 20,31 ****
+  import com.jgoodies.looks.windows.WindowsLookAndFeel;
+  
+  /**
+   * GUI component to configure plugin.
+!  *
+!  * @author  Martin Skopp
+   * @version $Revision$
+   */
+  class ConfigureTab extends JPanel implements SettingsTab {
+! 	
+      private final Configuration config;
+      private JComboBox lafChoice, themeChoice;
+--- 26,39 ----
+  import com.jgoodies.looks.windows.WindowsLookAndFeel;
+  
++ import devplugin.SettingsTab;
++ 
+  /**
+   * GUI component to configure plugin.
+!  * 
+!  * @author Martin Skopp
+   * @version $Revision$
+   */
+  class ConfigureTab extends JPanel implements SettingsTab {
+! 
+      private final Configuration config;
+      private JComboBox lafChoice, themeChoice;
+***************
+*** 63,67 ****
+      private void initComponents() {
+          final LookAndFeel[] lafs = getSupportedLookAndFeels();
+!         final Object[] themes = PlasticLookAndFeel.getInstalledThemes().toArray();
+  
+          looksEnabled = new JCheckBox(Resources.LABEL_ENABLE);
+--- 71,76 ----
+      private void initComponents() {
+          final LookAndFeel[] lafs = getSupportedLookAndFeels();
+!         final Object[] themes = PlasticLookAndFeel.getInstalledThemes()
+!             .toArray();
+  
+          looksEnabled = new JCheckBox(Resources.LABEL_ENABLE);
+***************
+*** 86,90 ****
+          String selectedTheme = config.getTheme().getName();
+          for (int i = 0; i < themes.length; i++) {
+!             if (((MetalTheme)themes[i]).getName().equals(selectedTheme)) {
+                  themeChoice.setSelectedIndex(i);
+                  break;
+--- 95,99 ----
+          String selectedTheme = config.getTheme().getName();
+          for (int i = 0; i < themes.length; i++) {
+!             if (((MetalTheme) themes[i]).getName().equals(selectedTheme)) {
+                  themeChoice.setSelectedIndex(i);
+                  break;
+***************
+*** 92,99 ****
+          }
+  
+-         
+          dropShadow = new JCheckBox(Resources.LABEL_DROP_SHADOW);
+          dropShadow.setSelected(config.isPopupDropShadowEnabled());
+!         
+          noteLabel = new JLabel(Resources.LABEL_NOTE);
+      }
+--- 101,107 ----
+          }
+  
+          dropShadow = new JCheckBox(Resources.LABEL_DROP_SHADOW);
+          dropShadow.setSelected(config.isPopupDropShadowEnabled());
+! 
+          noteLabel = new JLabel(Resources.LABEL_NOTE);
+      }
+***************
+*** 102,138 ****
+          if (!initilized) {
+              /*
+!              * TV-Browser invokes (at least "1.1alpha3" did)
+!              * this method multiple times.
+!              * Initializing components again would
+!              * reset selected values in UI components
+               */
+              initilized = true;
+              initComponents();
+!             
+              JPanel choices = new JPanel();
+              choices.setBorder(BorderFactory.createTitledBorder(Resources.NAME));
+              choices.setLayout(new SpringLayout());
+!             
+              choices.add(new JLabel());
+              choices.add(looksEnabled);
+!             
+              choices.add(lafLabel);
+              choices.add(lafChoice);
+!             
+              choices.add(themeLabel);
+              choices.add(themeChoice);
+!             
+              choices.add(new JLabel());
+              choices.add(dropShadow);
+!     
+!             SpringUtilities.makeCompactGrid(choices,
+!                                             4, 2,   //rows, cols
+!                                             6, 6,   //initX, initY
+!                                             6, 6);  //xPad, yPad
+!             
+              setLayout(new BorderLayout());
+!             
+              add(choices, BorderLayout.NORTH);
+!             
+              JPanel note = new JPanel();
+              note.setBorder(BorderFactory.createTitledBorder(""));
+--- 110,144 ----
+          if (!initilized) {
+              /*
+!              * TV-Browser invokes (at least "1.1alpha3" did) this method
+!              * multiple times. Initializing components again would reset
+!              * selected values in UI components
+               */
+              initilized = true;
+              initComponents();
+! 
+              JPanel choices = new JPanel();
+              choices.setBorder(BorderFactory.createTitledBorder(Resources.NAME));
+              choices.setLayout(new SpringLayout());
+! 
+              choices.add(new JLabel());
+              choices.add(looksEnabled);
+! 
+              choices.add(lafLabel);
+              choices.add(lafChoice);
+! 
+              choices.add(themeLabel);
+              choices.add(themeChoice);
+! 
+              choices.add(new JLabel());
+              choices.add(dropShadow);
+! 
+!             SpringUtilities.makeCompactGrid(choices, 4, 2, // rows, cols
+!                 6, 6, // initX, initY
+!                 6, 6); // xPad, yPad
+! 
+              setLayout(new BorderLayout());
+! 
+              add(choices, BorderLayout.NORTH);
+! 
+              JPanel note = new JPanel();
+              note.setBorder(BorderFactory.createTitledBorder(""));
+***************
+*** 142,160 ****
+          return this;
+      }
+!     
+! 	public void saveSettings() {
+! 	    config.setActive(looksEnabled.isSelected());
+! 	    config.setLaf((LookAndFeel) lafChoice.getSelectedItem());
+! 	    config.setTheme((PlasticTheme) themeChoice.getSelectedItem());
+          config.setPopupDropShadow(dropShadow.isSelected());
+! 	}
+  
+! 	public Icon getIcon() {
+! 	    return new ImageIcon(ImageUtilities.createImageFromJar(
+! 	            "jgoodieslooksplugin/jgoodies-icon.gif", getClass()));
+! 	}
+  
+! 	public String getTitle() {
+! 		return Resources.TITLE;
+! 	}
+  }
+--- 148,166 ----
+          return this;
+      }
+! 
+!     public void saveSettings() {
+!         config.setActive(looksEnabled.isSelected());
+!         config.setLaf((LookAndFeel) lafChoice.getSelectedItem());
+!         config.setTheme((PlasticTheme) themeChoice.getSelectedItem());
+          config.setPopupDropShadow(dropShadow.isSelected());
+!     }
+  
+!     public Icon getIcon() {
+!         return new ImageIcon(ImageUtilities.createImageFromJar(
+!             "jgoodieslooksplugin/jgoodies-icon.gif", getClass()));
+!     }
+  
+!     public String getTitle() {
+!         return Resources.TITLE;
+!     }
+  }
+
+Index: Resources.java
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin/Resources.java,v
+retrieving revision 1.6
+retrieving revision 1.7
+diff -C2 -d -r1.6 -r1.7
+*** Resources.java	18 Aug 2005 07:26:19 -0000	1.6
+--- Resources.java	20 Aug 2005 12:43:13 -0000	1.7
+***************
+*** 18,22 ****
+  
+      private static final Localizer mLocalizer = Localizer
+!             .getLocalizerFor(JGoodiesLooksPlugin.class);
+  
+      static final String TITLE = mLocalizer.msg("pluginTitle", "JGoodies Looks Look&Feel");
+--- 18,22 ----
+  
+      private static final Localizer mLocalizer = Localizer
+!         .getLocalizerFor(JGoodiesLooksPlugin.class);
+  
+      static final String TITLE = mLocalizer.msg("pluginTitle", "JGoodies Looks Look&Feel");
+***************
+*** 32,36 ****
+      static final String LABEL_NOTE = mLocalizer.msg("labelNote", "<html><b>ATTENTION:</b> Changing above settings will require<br>a restart of TV-Browser to apply changes.</html>");
+  
+!     static final PluginInfo PLUGIN_INFO = new PluginInfo(TITLE, DESC, AUTHOR, new Version(0, 5), LICENSE);
+  
+  }
+--- 32,37 ----
+      static final String LABEL_NOTE = mLocalizer.msg("labelNote", "<html><b>ATTENTION:</b> Changing above settings will require<br>a restart of TV-Browser to apply changes.</html>");
+  
+!     static final PluginInfo PLUGIN_INFO = new PluginInfo(TITLE, DESC, AUTHOR,
+!         new Version(0, 5), LICENSE);
+  
+  }
+
+Index: Configuration.java
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin/Configuration.java,v
+retrieving revision 1.6
+retrieving revision 1.7
+diff -C2 -d -r1.6 -r1.7
+*** Configuration.java	18 Aug 2005 06:03:57 -0000	1.6
+--- Configuration.java	20 Aug 2005 12:43:13 -0000	1.7
+***************
+*** 18,33 ****
+  
+  /**
+!  * Convenience class for accessing and mutating plugins settins. 
+!  *
+!  * @author  Martin Skopp
+   * @version $Revision$
+   */
+  final class Configuration {
+!     
+      /**
+       * Default value for activation of JGoodies L&F
+       */
+      private static final Boolean DEFAULT_ACTIVATION_STATE = Boolean.TRUE;
+!     
+      private static final String LAF = "laf";
+      private static final String THEME = "theme";
+--- 18,33 ----
+  
+  /**
+!  * Convenience class for accessing and mutating plugins settins.
+!  * 
+!  * @author Martin Skopp
+   * @version $Revision$
+   */
+  final class Configuration {
+! 
+      /**
+       * Default value for activation of JGoodies L&F
+       */
+      private static final Boolean DEFAULT_ACTIVATION_STATE = Boolean.TRUE;
+! 
+      private static final String LAF = "laf";
+      private static final String THEME = "theme";
+***************
+*** 35,39 ****
+      private static final String POPUP_DROP_SHADOW = "popupDropShadow";
+      private Properties p;
+!     
+      private LookAndFeel otherLaf;
+  
+--- 35,39 ----
+      private static final String POPUP_DROP_SHADOW = "popupDropShadow";
+      private Properties p;
+! 
+      private LookAndFeel otherLaf;
+  
+***************
+*** 41,46 ****
+          p = props;
+          /*
+!          * initialize all default values.  This ensures all values are 
+!          * always there and always stores and always load
+           */
+          setLaf(getLaf());
+--- 41,46 ----
+          p = props;
+          /*
+!          * initialize all default values. This ensures all values are always
+!          * there and always stores and always load
+           */
+          setLaf(getLaf());
+***************
+*** 49,57 ****
+          setPopupDropShadow(isPopupDropShadowEnabled());
+      }
+!     
+      Properties getProperties() {
+          return p;
+      }
+!     
+      /**
+       * Activates JGoodies L&F if enabled or previously enabled L&F if JGoodies
+--- 49,57 ----
+          setPopupDropShadow(isPopupDropShadowEnabled());
+      }
+! 
+      Properties getProperties() {
+          return p;
+      }
+! 
+      /**
+       * Activates JGoodies L&F if enabled or previously enabled L&F if JGoodies
+***************
+*** 59,75 ****
+       */
+      void activateLaf() {
+! 		if (isActive()) {
+              if (otherLaf == null) {
+                  otherLaf = UIManager.getLookAndFeel();
+              }
+! 			try {
+                  Options.setPopupDropShadowEnabled(isPopupDropShadowEnabled());
+!                 UIManager.put("jgoodies.popupDropShadowEnabled", Boolean.valueOf(isPopupDropShadowEnabled()));
+!                 
+                  LookUtils.setLookAndTheme(getLaf(), getTheme());
+                  /*
+                   * Now inject the classloader of this plugin into the UIManager!
+!                  * found at https://lists.xcf.berkeley.edu/lists/advanced-java/2001-January/015380.html
+!                  *  
+                   * Alternative (copied from personal IM chat):
+                   * 
+--- 59,77 ----
+       */
+      void activateLaf() {
+!         if (isActive()) {
+              if (otherLaf == null) {
+                  otherLaf = UIManager.getLookAndFeel();
+              }
+!             try {
+                  Options.setPopupDropShadowEnabled(isPopupDropShadowEnabled());
+!                 UIManager.put("jgoodies.popupDropShadowEnabled", Boolean
+!                     .valueOf(isPopupDropShadowEnabled()));
+! 
+                  LookUtils.setLookAndTheme(getLaf(), getTheme());
+                  /*
+                   * Now inject the classloader of this plugin into the UIManager!
+!                  * found at
+!                  * https://lists.xcf.berkeley.edu/lists/advanced-java/2001-January/015380.html
+!                  * 
+                   * Alternative (copied from personal IM chat):
+                   * 
+***************
+*** 80,90 ****
+                   *                 System.out.println(urls[i]);
+                   *               }
+!                  *  hampelratte: damit kommt man an die datei des plugins ran. das k?nnte man dann mit java.util.jar auseinandernehmen und die ganzen klassen nacheinander laden
+                   */
+                  ClassLoader pluginLoader = getLaf().getClass().getClassLoader();
+                  UIManager.getDefaults().put("ClassLoader", pluginLoader);
+              } catch (UnsupportedLookAndFeelException e) {
+! 	            e.printStackTrace();
+! 	        }
+          } else {
+              if (otherLaf != null) {
+--- 82,94 ----
+                   *                 System.out.println(urls[i]);
+                   *               }
+!                  * hampelratte: damit kommt man an die datei des plugins ran.
+!                  * das k?nnte man dann mit java.util.jar auseinandernehmen und
+!                  * die ganzen klassen nacheinander laden
+                   */
+                  ClassLoader pluginLoader = getLaf().getClass().getClassLoader();
+                  UIManager.getDefaults().put("ClassLoader", pluginLoader);
+              } catch (UnsupportedLookAndFeelException e) {
+!                 e.printStackTrace();
+!             }
+          } else {
+              if (otherLaf != null) {
+***************
+*** 92,96 ****
+                      UIManager.setLookAndFeel(otherLaf);
+                  } catch (UnsupportedLookAndFeelException e) {
+!     	            e.printStackTrace();
+                  }
+              }
+--- 96,100 ----
+                      UIManager.setLookAndFeel(otherLaf);
+                  } catch (UnsupportedLookAndFeelException e) {
+!                     e.printStackTrace();
+                  }
+              }
+***************
+*** 99,110 ****
+  
+      }
+!     
+      void setActive(boolean activ) {
+          p.setProperty(ACTIVE, "" + activ);
+      }
+!     
+      boolean isActive() {
+          return Boolean.TRUE.toString().equals(
+!                 p.getProperty(ACTIVE, DEFAULT_ACTIVATION_STATE.toString()));
+      }
+  
+--- 103,114 ----
+  
+      }
+! 
+      void setActive(boolean activ) {
+          p.setProperty(ACTIVE, "" + activ);
+      }
+! 
+      boolean isActive() {
+          return Boolean.TRUE.toString().equals(
+!             p.getProperty(ACTIVE, DEFAULT_ACTIVATION_STATE.toString()));
+      }
+  
+***************
+*** 112,118 ****
+          p.setProperty(LAF, laf.getClass().getName());
+      }
+!     
+      LookAndFeel getLaf() {
+!         String clazz = p.getProperty(LAF, null); 
+          if (clazz == null) {
+              // the overall default
+--- 116,122 ----
+          p.setProperty(LAF, laf.getClass().getName());
+      }
+! 
+      LookAndFeel getLaf() {
+!         String clazz = p.getProperty(LAF, null);
+          if (clazz == null) {
+              // the overall default
+***************
+*** 138,142 ****
+  
+      PlasticTheme getTheme() {
+!         String clazz = p.getProperty(THEME, null); 
+          if (clazz == null) {
+              // the overall default
+--- 142,146 ----
+  
+      PlasticTheme getTheme() {
+!         String clazz = p.getProperty(THEME, null);
+          if (clazz == null) {
+              // the overall default
+***************
+*** 156,165 ****
+          }
+      }
+!     
+      boolean isPopupDropShadowEnabled() {
+          return Boolean.TRUE.toString().equals(
+!             p.getProperty(POPUP_DROP_SHADOW, "" + Options.isPopupDropShadowEnabled()));
+      }
+!     
+      void setPopupDropShadow(boolean activ) {
+          p.setProperty(POPUP_DROP_SHADOW, "" + activ);
+--- 160,170 ----
+          }
+      }
+! 
+      boolean isPopupDropShadowEnabled() {
+          return Boolean.TRUE.toString().equals(
+!             p.getProperty(POPUP_DROP_SHADOW, ""
+!                 + Options.isPopupDropShadowEnabled()));
+      }
+! 
+      void setPopupDropShadow(boolean activ) {
+          p.setProperty(POPUP_DROP_SHADOW, "" + activ);
+
+Index: LabelListCellRenderer.java
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin/LabelListCellRenderer.java,v
+retrieving revision 1.4
+retrieving revision 1.5
+diff -C2 -d -r1.4 -r1.5
+*** LabelListCellRenderer.java	16 Aug 2005 20:56:11 -0000	1.4
+--- LabelListCellRenderer.java	20 Aug 2005 12:43:13 -0000	1.5
+***************
+*** 14,25 ****
+  /**
+   * General Renderer for Combobox entries.
+!  *
+!  * @author  Martin Skopp
+   * @version $Revision$
+   */
+  abstract class LabelListCellRenderer implements ListCellRenderer {
+!     
+      private final JLabel label;
+!     
+      LabelListCellRenderer() {
+          label = new JLabel();
+--- 14,25 ----
+  /**
+   * General Renderer for Combobox entries.
+!  * 
+!  * @author Martin Skopp
+   * @version $Revision$
+   */
+  abstract class LabelListCellRenderer implements ListCellRenderer {
+! 
+      private final JLabel label;
+! 
+      LabelListCellRenderer() {
+          label = new JLabel();
+***************
+*** 27,41 ****
+          label.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+      }
+-     
+-     abstract protected String getText(Object value); 
+-     abstract protected String getToolTipText(Object value); 
+  
+!     public final Component getListCellRendererComponent(JList list, Object value,
+!             int index, boolean isSelected, boolean cellHasFocus) {
+  
+          label.setEnabled(list.isEnabled());
+          label.setFont(list.getFont());
+!         label.setBackground(isSelected ? list.getSelectionBackground() : list.getBackground());
+!         label.setForeground(isSelected ? list.getSelectionForeground() : list.getForeground());
+  
+          String text = value == null ? "" : getText(value);
+--- 27,45 ----
+          label.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+      }
+  
+!     abstract protected String getText(Object value);
+! 
+!     abstract protected String getToolTipText(Object value);
+! 
+!     public final Component getListCellRendererComponent(JList list,
+!         Object value, int index, boolean isSelected, boolean cellHasFocus)
+!     {
+  
+          label.setEnabled(list.isEnabled());
+          label.setFont(list.getFont());
+!         label.setBackground(isSelected ? list.getSelectionBackground() : list
+!             .getBackground());
+!         label.setForeground(isSelected ? list.getSelectionForeground() : list
+!             .getForeground());
+  
+          String text = value == null ? "" : getText(value);
+
+
+
+From nobody at sheep.berlios.de  Sun Aug 21 23:25:07 2005
+From: nobody at sheep.berlios.de (emsker)
+Date: Sun, 21 Aug 2005 23:25:07 +0200
+Subject: [Tvbrowser-looks-cvs] develop01/lib ShadowPopup.java,NONE,1.1 looks-1.3.1-patched.jar,NONE,1.1 looks-1.3.1.jar,1.1,NONE
+Message-ID: <200508212125.j7LLP7615118@bat.berlios.de>
+
+Update of /cvsroot/tvbrowser-looks//develop01/lib
+In directory sheep:/tmp/cvs-serv12339/lib
+
+Added Files:
+	ShadowPopup.java looks-1.3.1-patched.jar 
+Removed Files:
+	looks-1.3.1.jar 
+Log Message:
+v0.06: Includes a workaround for looks-1.3.1 shadow bug (see 
+https://looks.dev.java.net/issues/show_bug.cgi?id=53
+looks issue #53).
+
+--- NEW FILE: ShadowPopup.java ---
+/*
+ * Copyright (c) 2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without 
+ * modification, are permitted provided that the following conditions are met:
+ * 
+ *  o Redistributions of source code must retain the above copyright notice, 
+ *    this list of conditions and the following disclaimer. 
+ *     
+ *  o Redistributions in binary form must reproduce the above copyright notice, 
+ *    this list of conditions and the following disclaimer in the documentation 
+ *    and/or other materials provided with the distribution. 
+ *     
+ *  o Neither the name of JGoodies Karsten Lentzsch nor the names of 
+ *    its contributors may be used to endorse or promote products derived 
+ *    from this software without specific prior written permission. 
+ *     
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ */
+
+package com.jgoodies.looks.common;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+
+/**
+ * Does all the magic for getting popups with drop shadows. 
+ * It adds the drop shadow border to the Popup, 
+ * in <code>#show</code> it snapshots the screen background as needed, 
+ * and in <code>#hide</code> it cleans up all changes made before.
+ * 
+ * @author Andrej Golovnin
+ * @version $Revision$
+ * 
+ * @see com.jgoodies.looks.common.ShadowPopupBorder
+ * @see com.jgoodies.looks.common.ShadowPopupFactory
+ */
+public final class ShadowPopup extends Popup {
+
+    /**
+     * Max number of items to store in the cache.
+     */
+    private static final int MAX_CACHE_SIZE = 5;
+
+    /**
+     * The cache to use for ShadowPopups.
+     */
+    private static List cache;
+
+    /**
+     * The singleton instance used to draw all borders.
+     */
+    private static final Border SHADOW_BORDER = ShadowPopupBorder.getInstance();
+
+    /**
+     * The size of the drop shadow.
+     */
+    private static final int SHADOW_SIZE = 5;
+
+    /**
+     * Indicates whether we can make snapshots from screen or not.
+     */
+    private static boolean canSnapshot = true;
+
+    /**
+     * The component mouse coordinates are relative to, may be null.
+     */
+    private Component owner;
+
+    /**
+     * The contents of the popup.
+     */
+    private Component contents;
+
+    /**
+     * The desired x and y location of the popup.
+     */
+    private int x, y;
+
+    /**
+     * The real popup. The #show() and #hide() methods will delegate
+     * all calls to these popup.
+     */
+    private Popup popup;
+
+    /**
+     * The border of the contents' parent replaced by SHADOW_BORDER.
+     */
+    private Border oldBorder;
+
+    /**
+     * The old value of the opaque property of the contents' parent.
+     */
+    private boolean oldOpaque;
+
+    /**
+     * The heavy weight container of the popup contents, may be null.
+     */
+    private Container heavyWeightContainer;
+
+    /**
+     * Returns a previously used <code>ShadowPopup</code>, or a new one
+     * if none of the popups have been recycled.
+     */
+    static Popup getInstance(Component owner, Component contents, int x,
+            int y, Popup delegate) {
+        ShadowPopup result;
+        synchronized (ShadowPopup.class) {
+            if (cache == null) {
+                cache = new ArrayList(MAX_CACHE_SIZE);
+            }
+            if (cache.size() > 0) {
+                result = (ShadowPopup) cache.remove(0);
+            } else {
+                result = new ShadowPopup();
+            }
+        }
+        result.reset(owner, contents, x, y, delegate);
+        return result;
+    }
+
+    /**
+     * Recycles the ShadowPopup.
+     */
+    private static void recycle(ShadowPopup popup) {
+        synchronized (ShadowPopup.class) {
+            if (cache.size() < MAX_CACHE_SIZE) {
+                cache.add(popup);
+            }
+        }
+    }
+    
+    public static boolean canSnapshot() {
+        return canSnapshot;
+    }
+
+    /** {@inheritDoc} */
+    public void hide() {
+        JComponent parent = (JComponent) contents.getParent();
+        popup.hide();
+        if (parent.getBorder() == SHADOW_BORDER) {
+            parent.setBorder(oldBorder);
+            parent.setOpaque(oldOpaque);
+            oldBorder = null;
+            if (heavyWeightContainer != null) {
+                parent.putClientProperty(ShadowPopupFactory.PROP_HORIZONTAL_BACKGROUND, null);
+                parent.putClientProperty(ShadowPopupFactory.PROP_VERTICAL_BACKGROUND, null);
+                heavyWeightContainer = null;
+            }
+        }
+        owner = null;
+        contents = null;
+        popup = null;
+        recycle(this);
+    }
+
+    /** {@inheritDoc} */
+    public void show() {
+        if (heavyWeightContainer != null) {
+            snapshot();
+        }
+        popup.show();
+    }
+
+    /**
+     * Reinitializes this ShadowPopup using the given parameters.
+     * 
+     * @param owner component mouse coordinates are relative to, may be null
+     * @param contents the contents of the popup
+     * @param x the desired x location of the popup
+     * @param y the desired y location of the popup
+     * @param popup the popup to wrap
+     */
+    private void reset(Component owner, Component contents, int x, int y,
+            Popup popup) {
+        this.owner = owner;
+        this.contents = contents;
+        this.popup = popup;
+        this.x = x;
+        this.y = y;
+        if (owner instanceof JComboBox) {
+            return;
+        }
+        Container mediumWeightContainer = null;
+        for(Container p = contents.getParent(); p != null; p = p.getParent()) {
+            if (p instanceof JWindow) {
+                // Workaround for the gray rect problem.
+                p.setBackground(contents.getBackground());
+                heavyWeightContainer = p;
+                break;
+            } else if (p instanceof Panel) {
+                // It is medium weight. Setting background
+                // to a transparent color makes it transparent and
+                // we don't need to capture the screen background.
+                Color bg = p.getBackground();
+                int rgba = contents.getBackground().getRGB() & 0x00ffffff;
+                if ((bg == null) || (bg.getRGB() != rgba)) {
+                    p.setBackground(new Color(rgba, true));
+                }
+                mediumWeightContainer = p;
+                break;
+            }
+        }
+        JComponent parent = (JComponent) contents.getParent();
+        oldOpaque = parent.isOpaque();
+        oldBorder = parent.getBorder();
+        parent.setOpaque(false);
+        parent.setBorder(SHADOW_BORDER);
+        // Pack it because we have changed the border.
+        if (mediumWeightContainer != null) {
+            mediumWeightContainer.setSize(
+                    mediumWeightContainer.getPreferredSize());
+        } else {
+            parent.setSize(parent.getPreferredSize());
+        }
+    }
+
+    /**
+     * The 'scratch pad' objects used to calculate dirty regions of
+     * the screen snapshots.
+     * 
+     * @see #snapshot()
+     */
+    private static final Point point = new Point();
+    private static final Rectangle rect = new Rectangle();
+
+    /**
+     * Snapshots the background. The snapshots are stored as client
+     * properties of the contents' parent. The next time the border is drawn,
+     * this background will be used.<p>
+     * 
+     * Uses a robot on the default screen device to capture the screen
+     * region under the drop shadow. Does <em>not</em> use the window's
+     * device, because that may be an outdated device (due to popup reuse)
+     * and the robot's origin seems to be adjusted with the default screen
+     * device.
+     * 
+     * @see #show()
+     * @see com.jgoodies.looks.common.ShadowPopupBorder
+     */
+    private void snapshot() {
+        try {
+            Robot robot = new Robot(); // uses the default screen device
+
+            Dimension size = heavyWeightContainer.getPreferredSize();
+            int width = size.width;
+            int height = size.height;
+
+            rect.setBounds(x, y + height - SHADOW_SIZE, width, SHADOW_SIZE);
+            BufferedImage hShadowBg = robot.createScreenCapture(rect);
+
+            rect.setBounds(x + width - SHADOW_SIZE, y, SHADOW_SIZE,
+                    height - SHADOW_SIZE);
+            BufferedImage vShadowBg = robot.createScreenCapture(rect);
+
+            JComponent parent = (JComponent) contents.getParent();
+            parent.putClientProperty(ShadowPopupFactory.PROP_HORIZONTAL_BACKGROUND, hShadowBg);
+            parent.putClientProperty(ShadowPopupFactory.PROP_VERTICAL_BACKGROUND, vShadowBg);
+
+            Container layeredPane = getLayeredPane();
+            if (layeredPane == null) {
+                // This could happen if owner is null.
+                return;
+            }
+
+            int layeredPaneWidth = layeredPane.getWidth();
+            int layeredPaneHeight = layeredPane.getHeight();
+
+            point.x = x;
+            point.y = y;
+            SwingUtilities.convertPointFromScreen(point, layeredPane);
+
+            // If needed paint dirty region of the horizontal snapshot.
+            rect.x = point.x;
+            rect.y = point.y + height - SHADOW_SIZE;
+            rect.width = width;
+            rect.height = SHADOW_SIZE;
+
+            if ((rect.x + rect.width) > layeredPaneWidth) {
+                rect.width = layeredPaneWidth - rect.x;
+            }
+            if ((rect.y + rect.height) > layeredPaneHeight) {
+                rect.height = layeredPaneHeight - rect.y;
+            }
+            if (!rect.isEmpty()) {
+                Graphics g = hShadowBg.createGraphics();
+                g.translate(-rect.x, -rect.y);
+                g.setClip(rect);
+                boolean doubleBuffered = layeredPane.isDoubleBuffered();
+                if(layeredPane instanceof JComponent) {
+                  ((JComponent)layeredPane).setDoubleBuffered(false);                
+                  layeredPane.paint(g);
+                  ((JComponent)layeredPane).setDoubleBuffered(doubleBuffered);
+                }
+                g.dispose();
+            }
+
+            // If needed paint dirty region of the vertical snapshot.
+            rect.x = point.x + width - SHADOW_SIZE;
+            rect.y = point.y;
+            rect.width = SHADOW_SIZE;
+            rect.height = height - SHADOW_SIZE;
+
+            if ((rect.x + rect.width) > layeredPaneWidth) {
+                rect.width = layeredPaneWidth - rect.x;
+            }
+            if ((rect.y + rect.height) > layeredPaneHeight) {
+                rect.height = layeredPaneHeight - rect.y;
+            }
+            if (!rect.isEmpty()) {
+                Graphics g = vShadowBg.createGraphics();
+                g.translate(-rect.x, -rect.y);
+                g.setClip(rect);
+                boolean doubleBuffered = layeredPane.isDoubleBuffered();
+                if(layeredPane instanceof JComponent) {
+                  ((JComponent)layeredPane).setDoubleBuffered(false);                
+                  layeredPane.paint(g);
+                  ((JComponent)layeredPane).setDoubleBuffered(doubleBuffered);
+                }
+                g.dispose();
+            }
+        } catch (AWTException e) {
+            canSnapshot = false;
+        } catch (SecurityException e) {
+            canSnapshot = false;
+        }
+    }
+
+    /**
+     * @return the top level layered pane which contains the owner.
+     */
+    private Container getLayeredPane() {
+        // The code below is copied from PopupFactory#LightWeightPopup#show()
+        Container parent = null;
+        if (owner != null) {
+            parent = owner instanceof Container
+                    ? (Container) owner 
+                    : owner.getParent();
+        }
+        // Try to find a JLayeredPane and Window to add 
+        for (Container p = parent; p != null; p = p.getParent()) {
+            if (p instanceof JRootPane) {
+                if (p.getParent() instanceof JInternalFrame) {
+                    continue;
+                }
+                parent = ((JRootPane)p).getLayeredPane();
+                // Continue, so that if there is a higher JRootPane, we'll
+                // pick it up.
+            } else if(p instanceof Window) {
+                if (parent == null) {
+                    parent = p;
+                }
+                break;
+            } else if (p instanceof JApplet) {
+                // Painting code stops at Applets, we don't want
+                // to add to a Component above an Applet otherwise
+                // you'll never see it painted.
+                break;
+            }
+        }
+        return (Container) parent;
+    }
+
+}
+--- NEW FILE: looks-1.3.1-patched.jar ---
+(This appears to be a binary file; contents omitted.)
+
+--- looks-1.3.1.jar DELETED ---
+
+
+
+From nobody at sheep.berlios.de  Sun Aug 21 23:25:07 2005
+From: nobody at sheep.berlios.de (emsker)
+Date: Sun, 21 Aug 2005 23:25:07 +0200
+Subject: [Tvbrowser-looks-cvs] develop01/src/main/jgoodieslooksplugin Resources.java,1.7,1.8
+Message-ID: <200508212125.j7LLP7615122@bat.berlios.de>
+
+Update of /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin
+In directory sheep:/tmp/cvs-serv12339/src/main/jgoodieslooksplugin
+
+Modified Files:
+	Resources.java 
+Log Message:
+v0.06: Includes a workaround for looks-1.3.1 shadow bug (see 
+https://looks.dev.java.net/issues/show_bug.cgi?id=53
+looks issue #53).
+
+Index: Resources.java
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin/Resources.java,v
+retrieving revision 1.7
+retrieving revision 1.8
+diff -C2 -d -r1.7 -r1.8
+*** Resources.java	20 Aug 2005 12:43:13 -0000	1.7
+--- Resources.java	21 Aug 2005 21:25:05 -0000	1.8
+***************
+*** 33,37 ****
+  
+      static final PluginInfo PLUGIN_INFO = new PluginInfo(TITLE, DESC, AUTHOR,
+!         new Version(0, 5), LICENSE);
+  
+  }
+--- 33,37 ----
+  
+      static final PluginInfo PLUGIN_INFO = new PluginInfo(TITLE, DESC, AUTHOR,
+!         new Version(0, 6), LICENSE);
+  
+  }
+
+
+
+From nobody at sheep.berlios.de  Tue Aug 23 23:55:09 2005
+From: nobody at sheep.berlios.de (emsker)
+Date: Tue, 23 Aug 2005 23:55:09 +0200
+Subject: [Tvbrowser-looks-cvs] develop01/src/resource/jgoodieslooksplugin jgoodieslooksplugin_de.properties,1.3,1.4 jgoodieslooksplugin.properties,1.2,1.3
+Message-ID: <200508232155.j7NLt9603028@bat.berlios.de>
+
+Update of /cvsroot/tvbrowser-looks//develop01/src/resource/jgoodieslooksplugin
+In directory sheep:/tmp/cvs-serv11131/src/resource/jgoodieslooksplugin
+
+Modified Files:
+	jgoodieslooksplugin_de.properties 
+	jgoodieslooksplugin.properties 
+Log Message:
+- build configuration UI via JGoodies forms
+- apply L&F changes for (nearly) all TVBrowser 
+  UI components without restart
+
+Index: jgoodieslooksplugin_de.properties
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks//develop01/src/resource/jgoodieslooksplugin/jgoodieslooksplugin_de.properties,v
+retrieving revision 1.3
+retrieving revision 1.4
+diff -C2 -d -r1.3 -r1.4
+*** jgoodieslooksplugin_de.properties	18 Aug 2005 07:25:51 -0000	1.3
+--- jgoodieslooksplugin_de.properties	23 Aug 2005 21:55:07 -0000	1.4
+***************
+*** 16,18 ****
+  JGoodiesLooksPlugin.labelTheme=Thema:
+  JGoodiesLooksPlugin.labelDropShadow=Schlagschatten
+- JGoodiesLooksPlugin.labelNote=<html><b>ACHTUNG:</b> \u00c4nderungen an diesen Einstellungen<br>ben\u00f6tigen einen Neustart von TV-Browser zur Aktivierung.</html> 
+--- 16,17 ----
+
+Index: jgoodieslooksplugin.properties
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks//develop01/src/resource/jgoodieslooksplugin/jgoodieslooksplugin.properties,v
+retrieving revision 1.2
+retrieving revision 1.3
+diff -C2 -d -r1.2 -r1.3
+*** jgoodieslooksplugin.properties	18 Aug 2005 06:04:16 -0000	1.2
+--- jgoodieslooksplugin.properties	23 Aug 2005 21:55:07 -0000	1.3
+***************
+*** 7,9 ****
+  JGoodiesLooksPlugin.labelTheme=Theme:
+  JGoodiesLooksPlugin.labelDropShadow=Popup Menu Drop Shadow
+- JGoodiesLooksPlugin.labelNote=<html><b>ATTENTION:</b> Changing above settings will require<br>a restart of TV-Browser to apply changes.</html> 
+--- 7,8 ----
+
+
+
+From nobody at sheep.berlios.de  Tue Aug 23 23:55:10 2005
+From: nobody at sheep.berlios.de (emsker)
+Date: Tue, 23 Aug 2005 23:55:10 +0200
+Subject: [Tvbrowser-looks-cvs] develop01/src/main/jgoodieslooksplugin ConfigureTab.java,1.7,1.8 Resources.java,1.8,1.9 Configuration.java,1.7,1.8
+Message-ID: <200508232155.j7NLtA603032@bat.berlios.de>
+
+Update of /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin
+In directory sheep:/tmp/cvs-serv11131/src/main/jgoodieslooksplugin
+
+Modified Files:
+	ConfigureTab.java Resources.java Configuration.java 
+Log Message:
+- build configuration UI via JGoodies forms
+- apply L&F changes for (nearly) all TVBrowser 
+  UI components without restart
+
+Index: ConfigureTab.java
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin/ConfigureTab.java,v
+retrieving revision 1.7
+retrieving revision 1.8
+diff -C2 -d -r1.7 -r1.8
+*** ConfigureTab.java	20 Aug 2005 12:43:13 -0000	1.7
+--- ConfigureTab.java	23 Aug 2005 21:55:07 -0000	1.8
+***************
+*** 5,23 ****
+  package jgoodieslooksplugin;
+  
+! import java.awt.BorderLayout;
+! 
+! import javax.swing.BorderFactory;
+! import javax.swing.Icon;
+! import javax.swing.ImageIcon;
+! import javax.swing.JCheckBox;
+! import javax.swing.JComboBox;
+! import javax.swing.JLabel;
+! import javax.swing.JPanel;
+! import javax.swing.LookAndFeel;
+! import javax.swing.SpringLayout;
+  import javax.swing.plaf.metal.MetalTheme;
+  
+  import util.ui.ImageUtilities;
+  
+  import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
+  import com.jgoodies.looks.plastic.PlasticLookAndFeel;
+--- 5,16 ----
+  package jgoodieslooksplugin;
+  
+! import javax.swing.*;
+  import javax.swing.plaf.metal.MetalTheme;
+  
+  import util.ui.ImageUtilities;
+  
++ import com.jgoodies.forms.builder.PanelBuilder;
++ import com.jgoodies.forms.layout.CellConstraints;
++ import com.jgoodies.forms.layout.FormLayout;
+  import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
+  import com.jgoodies.looks.plastic.PlasticLookAndFeel;
+***************
+*** 39,43 ****
+      private JComboBox lafChoice, themeChoice;
+      private JCheckBox looksEnabled, dropShadow;
+!     private JLabel lafLabel, themeLabel, noteLabel;
+      private boolean initilized = false;
+  
+--- 32,36 ----
+      private JComboBox lafChoice, themeChoice;
+      private JCheckBox looksEnabled, dropShadow;
+!     private JPanel settingsPanel;
+      private boolean initilized = false;
+  
+***************
+*** 79,84 ****
+          lafChoice = new JComboBox(lafs);
+          lafChoice.setRenderer(new ComboBoxLafRenderer());
+-         lafLabel = new JLabel(Resources.LABEL_LAF);
+-         lafLabel.setLabelFor(lafChoice);
+          String selectedLaf = config.getLaf().getName();
+          for (int i = 0; i < lafs.length; i++) {
+--- 72,75 ----
+***************
+*** 91,96 ****
+          themeChoice = new JComboBox(themes);
+          themeChoice.setRenderer(new ComboBoxThemeRenderer());
+-         themeLabel = new JLabel(Resources.LABEL_THEME);
+-         themeLabel.setLabelFor(themeChoice);
+          String selectedTheme = config.getTheme().getName();
+          for (int i = 0; i < themes.length; i++) {
+--- 82,85 ----
+***************
+*** 103,108 ****
+          dropShadow = new JCheckBox(Resources.LABEL_DROP_SHADOW);
+          dropShadow.setSelected(config.isPopupDropShadowEnabled());
+- 
+-         noteLabel = new JLabel(Resources.LABEL_NOTE);
+      }
+  
+--- 92,95 ----
+***************
+*** 117,150 ****
+              initComponents();
+  
+!             JPanel choices = new JPanel();
+!             choices.setBorder(BorderFactory.createTitledBorder(Resources.NAME));
+!             choices.setLayout(new SpringLayout());
+! 
+!             choices.add(new JLabel());
+!             choices.add(looksEnabled);
+! 
+!             choices.add(lafLabel);
+!             choices.add(lafChoice);
+! 
+!             choices.add(themeLabel);
+!             choices.add(themeChoice);
+! 
+!             choices.add(new JLabel());
+!             choices.add(dropShadow);
+! 
+!             SpringUtilities.makeCompactGrid(choices, 4, 2, // rows, cols
+!                 6, 6, // initX, initY
+!                 6, 6); // xPad, yPad
+! 
+!             setLayout(new BorderLayout());
+! 
+!             add(choices, BorderLayout.NORTH);
+! 
+!             JPanel note = new JPanel();
+!             note.setBorder(BorderFactory.createTitledBorder(""));
+!             note.add(noteLabel);
+!             add(note, BorderLayout.SOUTH);
+          }
+!         return this;
+      }
+  
+--- 104,129 ----
+              initComponents();
+  
+!             FormLayout layout = new FormLayout("pref, 4dlu, pref",
+!                 "pref, 2dlu, pref, 2dlu, pref, 2dlu, pref, 2dlu, pref");
+!             PanelBuilder builder = new PanelBuilder(layout);
+!             builder.setDefaultDialogBorder();
+!             CellConstraints cc = new CellConstraints();
+!             
+!             builder.addSeparator(Resources.NAME,    cc.xyw(1, 1, 3));
+!             
+!             builder.add(looksEnabled,               cc.xy(3, 3));
+!             
+!             builder.addLabel(Resources.LABEL_LAF,   cc.xy(1, 5));
+!             builder.add(lafChoice,                  cc.xy(3, 5));
+!             
+!             builder.addLabel(Resources.LABEL_THEME, cc.xy(1, 7));
+!             builder.add(themeChoice,                cc.xy(3, 7));
+!             
+!             builder.add(dropShadow,                 cc.xy(3, 9));
+!             
+!             settingsPanel = builder.getPanel();
+          }
+! 
+!         return settingsPanel;
+      }
+  
+***************
+*** 154,157 ****
+--- 133,143 ----
+          config.setTheme((PlasticTheme) themeChoice.getSelectedItem());
+          config.setPopupDropShadow(dropShadow.isSelected());
++         config.activateLaf();
++         SwingUtilities.invokeLater(new Runnable() {
++ 
++             public void run() {
++                 SwingUtilities.updateComponentTreeUI(createSettingsPanel());
++             }
++         });
+      }
+  
+
+Index: Resources.java
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin/Resources.java,v
+retrieving revision 1.8
+retrieving revision 1.9
+diff -C2 -d -r1.8 -r1.9
+*** Resources.java	21 Aug 2005 21:25:05 -0000	1.8
+--- Resources.java	23 Aug 2005 21:55:07 -0000	1.9
+***************
+*** 30,37 ****
+      static final String LABEL_THEME = mLocalizer.msg("labelTheme", "Theme:");
+      static final String LABEL_DROP_SHADOW = mLocalizer.msg("labelDropShadow", "Popup Menu Drop Shadow");
+-     static final String LABEL_NOTE = mLocalizer.msg("labelNote", "<html><b>ATTENTION:</b> Changing above settings will require<br>a restart of TV-Browser to apply changes.</html>");
+  
+      static final PluginInfo PLUGIN_INFO = new PluginInfo(TITLE, DESC, AUTHOR,
+!         new Version(0, 6), LICENSE);
+  
+  }
+--- 30,36 ----
+      static final String LABEL_THEME = mLocalizer.msg("labelTheme", "Theme:");
+      static final String LABEL_DROP_SHADOW = mLocalizer.msg("labelDropShadow", "Popup Menu Drop Shadow");
+  
+      static final PluginInfo PLUGIN_INFO = new PluginInfo(TITLE, DESC, AUTHOR,
+!         new Version(0, 7), LICENSE);
+  
+  }
+
+Index: Configuration.java
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin/Configuration.java,v
+retrieving revision 1.7
+retrieving revision 1.8
+diff -C2 -d -r1.7 -r1.8
+*** Configuration.java	20 Aug 2005 12:43:13 -0000	1.7
+--- Configuration.java	23 Aug 2005 21:55:07 -0000	1.8
+***************
+*** 8,14 ****
+--- 8,17 ----
+  
+  import javax.swing.LookAndFeel;
++ import javax.swing.SwingUtilities;
+  import javax.swing.UIManager;
+  import javax.swing.UnsupportedLookAndFeelException;
+  
++ import tvbrowser.ui.mainframe.MainFrame;
++ 
+  import com.jgoodies.looks.LookUtils;
+  import com.jgoodies.looks.Options;
+***************
+*** 88,91 ****
+--- 91,95 ----
+                  ClassLoader pluginLoader = getLaf().getClass().getClassLoader();
+                  UIManager.getDefaults().put("ClassLoader", pluginLoader);
++                 updateCompleteUI();
+              } catch (UnsupportedLookAndFeelException e) {
+                  e.printStackTrace();
+***************
+*** 95,98 ****
+--- 99,103 ----
+                  try {
+                      UIManager.setLookAndFeel(otherLaf);
++                     updateCompleteUI();
+                  } catch (UnsupportedLookAndFeelException e) {
+                      e.printStackTrace();
+***************
+*** 102,105 ****
+--- 107,119 ----
+          }
+  
++     }
++     
++     private void updateCompleteUI() {
++         SwingUtilities.invokeLater(new Runnable() {
++ 
++             public void run() {
++                 SwingUtilities.updateComponentTreeUI(MainFrame.getInstance());
++             }
++         });
+      }
+  
+
+
+
+From nobody at sheep.berlios.de  Wed Aug 24 00:02:20 2005
+From: nobody at sheep.berlios.de (emsker)
+Date: Wed, 24 Aug 2005 00:02:20 +0200
+Subject: [Tvbrowser-looks-cvs] develop01/src/resource/jgoodieslooksplugin jgoodieslooksplugin_de.properties,1.4,1.5 jgoodieslooksplugin.properties,1.3,1.4
+Message-ID: <200508232202.j7NM2K603201@bat.berlios.de>
+
+Update of /cvsroot/tvbrowser-looks//develop01/src/resource/jgoodieslooksplugin
+In directory sheep:/tmp/cvs-serv11583/src/resource/jgoodieslooksplugin
+
+Modified Files:
+	jgoodieslooksplugin_de.properties 
+	jgoodieslooksplugin.properties 
+Log Message:
+- build configuration UI via JGoodies forms
+- apply L&F changes for (nearly) all TVBrowser 
+  UI components without restart
+
+Index: jgoodieslooksplugin_de.properties
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks//develop01/src/resource/jgoodieslooksplugin/jgoodieslooksplugin_de.properties,v
+retrieving revision 1.4
+retrieving revision 1.5
+diff -C2 -d -r1.4 -r1.5
+*** jgoodieslooksplugin_de.properties	23 Aug 2005 21:55:07 -0000	1.4
+--- jgoodieslooksplugin_de.properties	23 Aug 2005 22:02:18 -0000	1.5
+***************
+*** 9,13 ****
+  
+  JGoodiesLooksPlugin.pluginTitle=JGoodies Looks Look&Feel
+! JGoodiesLooksPlugin.pluginName=JGoodies Looks Look&Feel Konfiguration
+  JGoodiesLooksPlugin.description=Konfiguriert und aktiviert JGoodies Looks L&Fs\nCopyright (c) 2005 JGoodies Karsten Lentzsch.\nAll Rights Reserved.
+  
+--- 9,13 ----
+  
+  JGoodiesLooksPlugin.pluginTitle=JGoodies Looks Look&Feel
+! JGoodiesLooksPlugin.settings=Einstellungen
+  JGoodiesLooksPlugin.description=Konfiguriert und aktiviert JGoodies Looks L&Fs\nCopyright (c) 2005 JGoodies Karsten Lentzsch.\nAll Rights Reserved.
+  
+
+Index: jgoodieslooksplugin.properties
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks//develop01/src/resource/jgoodieslooksplugin/jgoodieslooksplugin.properties,v
+retrieving revision 1.3
+retrieving revision 1.4
+diff -C2 -d -r1.3 -r1.4
+*** jgoodieslooksplugin.properties	23 Aug 2005 21:55:07 -0000	1.3
+--- jgoodieslooksplugin.properties	23 Aug 2005 22:02:18 -0000	1.4
+***************
+*** 1,4 ****
+  JGoodiesLooksPlugin.pluginTitle=JGoodies Looks Look&Feel
+! JGoodiesLooksPlugin.pluginName=JGoodies Looks Look&Feel Configuration
+  JGoodiesLooksPlugin.description=Configures and activates JGoodies Looks L&Fs\nCopyright (c) 2005 JGoodies Karsten Lentzsch.\nAll Rights Reserved.
+  
+--- 1,4 ----
+  JGoodiesLooksPlugin.pluginTitle=JGoodies Looks Look&Feel
+! JGoodiesLooksPlugin.settings=Settings
+  JGoodiesLooksPlugin.description=Configures and activates JGoodies Looks L&Fs\nCopyright (c) 2005 JGoodies Karsten Lentzsch.\nAll Rights Reserved.
+  
+
+
+
+From nobody at sheep.berlios.de  Wed Aug 24 00:02:20 2005
+From: nobody at sheep.berlios.de (emsker)
+Date: Wed, 24 Aug 2005 00:02:20 +0200
+Subject: [Tvbrowser-looks-cvs] develop01/src/main/jgoodieslooksplugin ConfigureTab.java,1.8,1.9 Resources.java,1.9,1.10
+Message-ID: <200508232202.j7NM2K603205@bat.berlios.de>
+
+Update of /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin
+In directory sheep:/tmp/cvs-serv11583/src/main/jgoodieslooksplugin
+
+Modified Files:
+	ConfigureTab.java Resources.java 
+Log Message:
+- build configuration UI via JGoodies forms
+- apply L&F changes for (nearly) all TVBrowser 
+  UI components without restart
+
+Index: ConfigureTab.java
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin/ConfigureTab.java,v
+retrieving revision 1.8
+retrieving revision 1.9
+diff -C2 -d -r1.8 -r1.9
+*** ConfigureTab.java	23 Aug 2005 21:55:07 -0000	1.8
+--- ConfigureTab.java	23 Aug 2005 22:02:18 -0000	1.9
+***************
+*** 110,114 ****
+              CellConstraints cc = new CellConstraints();
+              
+!             builder.addSeparator(Resources.NAME,    cc.xyw(1, 1, 3));
+              
+              builder.add(looksEnabled,               cc.xy(3, 3));
+--- 110,114 ----
+              CellConstraints cc = new CellConstraints();
+              
+!             builder.addSeparator(Resources.SETTINGS,    cc.xyw(1, 1, 3));
+              
+              builder.add(looksEnabled,               cc.xy(3, 3));
+
+Index: Resources.java
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin/Resources.java,v
+retrieving revision 1.9
+retrieving revision 1.10
+diff -C2 -d -r1.9 -r1.10
+*** Resources.java	23 Aug 2005 21:55:07 -0000	1.9
+--- Resources.java	23 Aug 2005 22:02:18 -0000	1.10
+***************
+*** 21,25 ****
+  
+      static final String TITLE = mLocalizer.msg("pluginTitle", "JGoodies Looks Look&Feel");
+!     static final String NAME = mLocalizer.msg("pluginName", "JGoodies Looks Look&Feel Configuration");
+      static final String DESC = mLocalizer.msg("description", "Configures and activates JGoodies Looks L&Fs\nConfigures and activates JGoodies Looks L&Fs\nCopyright (c) 2005 JGoodies Karsten Lentzsch.\nAll Rights Reserved.");
+      static final String AUTHOR = "Martin Skopp";
+--- 21,25 ----
+  
+      static final String TITLE = mLocalizer.msg("pluginTitle", "JGoodies Looks Look&Feel");
+!     static final String SETTINGS = mLocalizer.msg("settings", "Settings");
+      static final String DESC = mLocalizer.msg("description", "Configures and activates JGoodies Looks L&Fs\nConfigures and activates JGoodies Looks L&Fs\nCopyright (c) 2005 JGoodies Karsten Lentzsch.\nAll Rights Reserved.");
+      static final String AUTHOR = "Martin Skopp";
+
+
+
+From nobody at sheep.berlios.de  Thu Aug 25 10:02:33 2005
+From: nobody at sheep.berlios.de (emsker)
+Date: Thu, 25 Aug 2005 10:02:33 +0200
+Subject: [Tvbrowser-looks-cvs] develop01/lib ShadowPopup.java,1.1,1.2 looks-1.3.1-patched.jar,1.1,1.2
+Message-ID: <200508250802.j7P82X600585@bat.berlios.de>
+
+Update of /cvsroot/tvbrowser-looks/develop01/lib
+In directory sheep:/tmp/cvs-serv18808/lib
+
+Modified Files:
+	ShadowPopup.java looks-1.3.1-patched.jar 
+Log Message:
+v0.08: fix a shadow painting bug, caused by incomplete patch for looks issue #53, see v0.06
+
+Index: ShadowPopup.java
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks/develop01/lib/ShadowPopup.java,v
+retrieving revision 1.1
+retrieving revision 1.2
+diff -u -d -r1.1 -r1.2
+--- ShadowPopup.java	21 Aug 2005 21:25:05 -0000	1.1
++++ ShadowPopup.java	25 Aug 2005 08:02:28 -0000	1.2
+@@ -301,11 +301,13 @@
+                 Graphics g = hShadowBg.createGraphics();
+                 g.translate(-rect.x, -rect.y);
+                 g.setClip(rect);
+-                boolean doubleBuffered = layeredPane.isDoubleBuffered();
+-                if(layeredPane instanceof JComponent) {
+-                  ((JComponent)layeredPane).setDoubleBuffered(false);                
+-                  layeredPane.paint(g);
+-                  ((JComponent)layeredPane).setDoubleBuffered(doubleBuffered);
++                if (layeredPane instanceof JComponent) {
++                    boolean doubleBuffered = layeredPane.isDoubleBuffered();
++                    ((JComponent) layeredPane).setDoubleBuffered(false);
++                    layeredPane.paint(g);
++                    ((JComponent) layeredPane).setDoubleBuffered(doubleBuffered);
++                } else {
++                    layeredPane.paint(g);
+                 }
+                 g.dispose();
+             }
+@@ -373,7 +375,7 @@
+                 break;
+             }
+         }
+-        return (Container) parent;
++        return parent;
+     }
+ 
+ }
+
+Index: looks-1.3.1-patched.jar
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks/develop01/lib/looks-1.3.1-patched.jar,v
+retrieving revision 1.1
+retrieving revision 1.2
+diff -u -d -r1.1 -r1.2
+Binary files /tmp/cvs.9fo6V2 and /tmp/cvs.IiTQPt differ
+
+
+
+From nobody at sheep.berlios.de  Thu Aug 25 10:02:33 2005
+From: nobody at sheep.berlios.de (emsker)
+Date: Thu, 25 Aug 2005 10:02:33 +0200
+Subject: [Tvbrowser-looks-cvs] develop01/src/main/jgoodieslooksplugin Resources.java,1.10,1.11
+Message-ID: <200508250802.j7P82X600589@bat.berlios.de>
+
+Update of /cvsroot/tvbrowser-looks/develop01/src/main/jgoodieslooksplugin
+In directory sheep:/tmp/cvs-serv18808/src/main/jgoodieslooksplugin
+
+Modified Files:
+	Resources.java 
+Log Message:
+v0.08: fix a shadow painting bug, caused by incomplete patch for looks issue #53, see v0.06
+
+Index: Resources.java
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks/develop01/src/main/jgoodieslooksplugin/Resources.java,v
+retrieving revision 1.10
+retrieving revision 1.11
+diff -u -d -r1.10 -r1.11
+--- Resources.java	23 Aug 2005 22:02:18 -0000	1.10
++++ Resources.java	25 Aug 2005 08:02:31 -0000	1.11
+@@ -31,6 +31,6 @@
+     static final String LABEL_DROP_SHADOW = mLocalizer.msg("labelDropShadow", "Popup Menu Drop Shadow");
+ 
+     static final PluginInfo PLUGIN_INFO = new PluginInfo(TITLE, DESC, AUTHOR,
+-        new Version(0, 7), LICENSE);
++        new Version(0, 8), LICENSE);
+ 
+ }
+
+
+

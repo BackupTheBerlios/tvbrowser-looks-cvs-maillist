@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Tvbrowser-looks-cvs] develop01/src/main/jgoodieslooksplugin ConfigureTab.java,1.8,1.9 Resources.java,1.9,1.10
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/tvbrowser-looks-cvs/2005-August/index.html" >
+   <LINK REL="made" HREF="mailto:tvbrowser-looks-cvs%40lists.berlios.de?Subject=Re%3A%20%5BTvbrowser-looks-cvs%5D%20develop01/src/main/jgoodieslooksplugin%20ConfigureTab.java%2C1.8%2C1.9%20Resources.java%2C1.9%2C1.10&In-Reply-To=%3C200508232202.j7NM2K603205%40bat.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000005.html">
+   <LINK REL="Next"  HREF="000007.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Tvbrowser-looks-cvs] develop01/src/main/jgoodieslooksplugin ConfigureTab.java,1.8,1.9 Resources.java,1.9,1.10</H1>
+    <B>emsker</B> 
+    <A HREF="mailto:tvbrowser-looks-cvs%40lists.berlios.de?Subject=Re%3A%20%5BTvbrowser-looks-cvs%5D%20develop01/src/main/jgoodieslooksplugin%20ConfigureTab.java%2C1.8%2C1.9%20Resources.java%2C1.9%2C1.10&In-Reply-To=%3C200508232202.j7NM2K603205%40bat.berlios.de%3E"
+       TITLE="[Tvbrowser-looks-cvs] develop01/src/main/jgoodieslooksplugin ConfigureTab.java,1.8,1.9 Resources.java,1.9,1.10">nobody at sheep.berlios.de
+       </A><BR>
+    <I>Wed Aug 24 00:02:20 CEST 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000005.html">[Tvbrowser-looks-cvs] develop01/src/resource/jgoodieslooksplugin jgoodieslooksplugin_de.properties,1.4,1.5 jgoodieslooksplugin.properties,1.3,1.4
+</A></li>
+        <LI>Next message: <A HREF="000007.html">[Tvbrowser-looks-cvs] develop01/lib ShadowPopup.java,1.1,1.2 looks-1.3.1-patched.jar,1.1,1.2
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Update of /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin
+In directory sheep:/tmp/cvs-serv11583/src/main/jgoodieslooksplugin
+
+Modified Files:
+	ConfigureTab.java Resources.java 
+Log Message:
+- build configuration UI via JGoodies forms
+- apply L&amp;F changes for (nearly) all TVBrowser 
+  UI components without restart
+
+Index: ConfigureTab.java
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin/ConfigureTab.java,v
+retrieving revision 1.8
+retrieving revision 1.9
+diff -C2 -d -r1.8 -r1.9
+*** ConfigureTab.java	23 Aug 2005 21:55:07 -0000	1.8
+--- ConfigureTab.java	23 Aug 2005 22:02:18 -0000	1.9
+***************
+*** 110,114 ****
+              CellConstraints cc = new CellConstraints();
+              
+!             builder.addSeparator(Resources.NAME,    cc.xyw(1, 1, 3));
+              
+              builder.add(looksEnabled,               cc.xy(3, 3));
+--- 110,114 ----
+              CellConstraints cc = new CellConstraints();
+              
+!             builder.addSeparator(Resources.SETTINGS,    cc.xyw(1, 1, 3));
+              
+              builder.add(looksEnabled,               cc.xy(3, 3));
+
+Index: Resources.java
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks//develop01/src/main/jgoodieslooksplugin/Resources.java,v
+retrieving revision 1.9
+retrieving revision 1.10
+diff -C2 -d -r1.9 -r1.10
+*** Resources.java	23 Aug 2005 21:55:07 -0000	1.9
+--- Resources.java	23 Aug 2005 22:02:18 -0000	1.10
+***************
+*** 21,25 ****
+  
+      static final String TITLE = mLocalizer.msg(&quot;pluginTitle&quot;, &quot;JGoodies Looks Look&amp;Feel&quot;);
+!     static final String NAME = mLocalizer.msg(&quot;pluginName&quot;, &quot;JGoodies Looks Look&amp;Feel Configuration&quot;);
+      static final String DESC = mLocalizer.msg(&quot;description&quot;, &quot;Configures and activates JGoodies Looks L&amp;Fs\nConfigures and activates JGoodies Looks L&amp;Fs\nCopyright (c) 2005 JGoodies Karsten Lentzsch.\nAll Rights Reserved.&quot;);
+      static final String AUTHOR = &quot;Martin Skopp&quot;;
+--- 21,25 ----
+  
+      static final String TITLE = mLocalizer.msg(&quot;pluginTitle&quot;, &quot;JGoodies Looks Look&amp;Feel&quot;);
+!     static final String SETTINGS = mLocalizer.msg(&quot;settings&quot;, &quot;Settings&quot;);
+      static final String DESC = mLocalizer.msg(&quot;description&quot;, &quot;Configures and activates JGoodies Looks L&amp;Fs\nConfigures and activates JGoodies Looks L&amp;Fs\nCopyright (c) 2005 JGoodies Karsten Lentzsch.\nAll Rights Reserved.&quot;);
+      static final String AUTHOR = &quot;Martin Skopp&quot;;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000005.html">[Tvbrowser-looks-cvs] develop01/src/resource/jgoodieslooksplugin jgoodieslooksplugin_de.properties,1.4,1.5 jgoodieslooksplugin.properties,1.3,1.4
+</A></li>
+	<LI>Next message: <A HREF="000007.html">[Tvbrowser-looks-cvs] develop01/lib ShadowPopup.java,1.1,1.2 looks-1.3.1-patched.jar,1.1,1.2
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/tvbrowser-looks-cvs">More information about the Tvbrowser-looks-cvs
+mailing list</a><br>
+</body></html>

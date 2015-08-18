@@ -1,0 +1,77 @@
+From nobody at sheep.berlios.de  Thu Sep 15 09:59:06 2005
+From: nobody at sheep.berlios.de (emsker)
+Date: Thu, 15 Sep 2005 09:59:06 +0200
+Subject: [Tvbrowser-looks-cvs] develop01/lib looks-1.3.2-snapshot-20050912.jar,NONE,1.1 looks-1.3.1-patched.jar,1.2,NONE
+Message-ID: <200509150759.j8F7x5108722@bat.berlios.de>
+
+Update of /cvsroot/tvbrowser-looks/develop01/lib
+In directory sheep:/tmp/cvs-serv24596/lib
+
+Added Files:
+	looks-1.3.2-snapshot-20050912.jar 
+Removed Files:
+	looks-1.3.1-patched.jar 
+Log Message:
+use looks-1.3.2-snapshot-20050912
+
+
+--- NEW FILE: looks-1.3.2-snapshot-20050912.jar ---
+(This appears to be a binary file; contents omitted.)
+
+--- looks-1.3.1-patched.jar DELETED ---
+
+
+
+From nobody at sheep.berlios.de  Thu Sep 15 10:08:36 2005
+From: nobody at sheep.berlios.de (emsker)
+Date: Thu, 15 Sep 2005 10:08:36 +0200
+Subject: [Tvbrowser-looks-cvs] develop01/src/main/jgoodieslooksplugin Resources.java,1.11,1.12
+Message-ID: <200509150808.j8F88a109126@bat.berlios.de>
+
+Update of /cvsroot/tvbrowser-looks/develop01/src/main/jgoodieslooksplugin
+In directory sheep:/tmp/cvs-serv26401/src/main/jgoodieslooksplugin
+
+Modified Files:
+	Resources.java 
+Log Message:
+increase version to 0.09 / use new looks snapshot
+
+
+Index: Resources.java
+===================================================================
+RCS file: /cvsroot/tvbrowser-looks/develop01/src/main/jgoodieslooksplugin/Resources.java,v
+retrieving revision 1.11
+retrieving revision 1.12
+diff -u -d -r1.11 -r1.12
+--- Resources.java	25 Aug 2005 08:02:31 -0000	1.11
++++ Resources.java	15 Sep 2005 08:08:34 -0000	1.12
+@@ -31,6 +31,6 @@
+     static final String LABEL_DROP_SHADOW = mLocalizer.msg("labelDropShadow", "Popup Menu Drop Shadow");
+ 
+     static final PluginInfo PLUGIN_INFO = new PluginInfo(TITLE, DESC, AUTHOR,
+-        new Version(0, 8), LICENSE);
++        new Version(0, 9), LICENSE);
+ 
+ }
+
+
+
+From nobody at sheep.berlios.de  Thu Sep 15 10:20:53 2005
+From: nobody at sheep.berlios.de (emsker)
+Date: Thu, 15 Sep 2005 10:20:53 +0200
+Subject: [Tvbrowser-looks-cvs] develop01/lib ShadowPopup.java,1.2,NONE
+Message-ID: <200509150820.j8F8Kr109603@bat.berlios.de>
+
+Update of /cvsroot/tvbrowser-looks/develop01/lib
+In directory sheep:/tmp/cvs-serv28076/lib
+
+Removed Files:
+	ShadowPopup.java 
+Log Message:
+now included in looks snapshot
+
+
+--- ShadowPopup.java DELETED ---
+
+
+

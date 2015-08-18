@@ -1,0 +1,458 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Tvbrowser-looks-cvs] develop01/lib ShadowPopup.java,NONE,1.1 looks-1.3.1-patched.jar,NONE,1.1 looks-1.3.1.jar,1.1,NONE
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/tvbrowser-looks-cvs/2005-August/index.html" >
+   <LINK REL="made" HREF="mailto:tvbrowser-looks-cvs%40lists.berlios.de?Subject=Re%3A%20%5BTvbrowser-looks-cvs%5D%20develop01/lib%20ShadowPopup.java%2CNONE%2C1.1%20looks-1.3.1-patched.jar%2CNONE%2C1.1%20looks-1.3.1.jar%2C1.1%2CNONE&In-Reply-To=%3C200508212125.j7LLP7615118%40bat.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000000.html">
+   <LINK REL="Next"  HREF="000002.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Tvbrowser-looks-cvs] develop01/lib ShadowPopup.java,NONE,1.1 looks-1.3.1-patched.jar,NONE,1.1 looks-1.3.1.jar,1.1,NONE</H1>
+    <B>emsker</B> 
+    <A HREF="mailto:tvbrowser-looks-cvs%40lists.berlios.de?Subject=Re%3A%20%5BTvbrowser-looks-cvs%5D%20develop01/lib%20ShadowPopup.java%2CNONE%2C1.1%20looks-1.3.1-patched.jar%2CNONE%2C1.1%20looks-1.3.1.jar%2C1.1%2CNONE&In-Reply-To=%3C200508212125.j7LLP7615118%40bat.berlios.de%3E"
+       TITLE="[Tvbrowser-looks-cvs] develop01/lib ShadowPopup.java,NONE,1.1 looks-1.3.1-patched.jar,NONE,1.1 looks-1.3.1.jar,1.1,NONE">nobody at sheep.berlios.de
+       </A><BR>
+    <I>Sun Aug 21 23:25:07 CEST 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000000.html">[Tvbrowser-looks-cvs] develop01/src/main/jgoodieslooksplugin ComboBoxLafRenderer.java,1.2,1.3 JGoodiesLooksPlugin.java,1.5,1.6 ComboBoxThemeRenderer.java,1.2,1.3 ConfigureTab.java,1.6,1.7 Resources.java,1.6,1.7 Configuration.java,1.6,1.7 LabelListCellRenderer.java,1.4,1.5
+</A></li>
+        <LI>Next message: <A HREF="000002.html">[Tvbrowser-looks-cvs] develop01/src/main/jgoodieslooksplugin Resources.java,1.7,1.8
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1">[ date ]</a>
+              <a href="thread.html#1">[ thread ]</a>
+              <a href="subject.html#1">[ subject ]</a>
+              <a href="author.html#1">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Update of /cvsroot/tvbrowser-looks//develop01/lib
+In directory sheep:/tmp/cvs-serv12339/lib
+
+Added Files:
+	ShadowPopup.java looks-1.3.1-patched.jar 
+Removed Files:
+	looks-1.3.1.jar 
+Log Message:
+v0.06: Includes a workaround for looks-1.3.1 shadow bug (see 
+<A HREF="https://looks.dev.java.net/issues/show_bug.cgi?id=53">https://looks.dev.java.net/issues/show_bug.cgi?id=53</A>
+looks issue #53).
+
+--- NEW FILE: ShadowPopup.java ---
+/*
+ * Copyright (c) 2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without 
+ * modification, are permitted provided that the following conditions are met:
+ * 
+ *  o Redistributions of source code must retain the above copyright notice, 
+ *    this list of conditions and the following disclaimer. 
+ *     
+ *  o Redistributions in binary form must reproduce the above copyright notice, 
+ *    this list of conditions and the following disclaimer in the documentation 
+ *    and/or other materials provided with the distribution. 
+ *     
+ *  o Neither the name of JGoodies Karsten Lentzsch nor the names of 
+ *    its contributors may be used to endorse or promote products derived 
+ *    from this software without specific prior written permission. 
+ *     
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; 
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ */
+
+package com.jgoodies.looks.common;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+
+/**
+ * Does all the magic for getting popups with drop shadows. 
+ * It adds the drop shadow border to the Popup, 
+ * in &lt;code&gt;#show&lt;/code&gt; it snapshots the screen background as needed, 
+ * and in &lt;code&gt;#hide&lt;/code&gt; it cleans up all changes made before.
+ * 
+ * @author Andrej Golovnin
+ * @version $Revision$
+ * 
+ * @see com.jgoodies.looks.common.ShadowPopupBorder
+ * @see com.jgoodies.looks.common.ShadowPopupFactory
+ */
+public final class ShadowPopup extends Popup {
+
+    /**
+     * Max number of items to store in the cache.
+     */
+    private static final int MAX_CACHE_SIZE = 5;
+
+    /**
+     * The cache to use for ShadowPopups.
+     */
+    private static List cache;
+
+    /**
+     * The singleton instance used to draw all borders.
+     */
+    private static final Border SHADOW_BORDER = ShadowPopupBorder.getInstance();
+
+    /**
+     * The size of the drop shadow.
+     */
+    private static final int SHADOW_SIZE = 5;
+
+    /**
+     * Indicates whether we can make snapshots from screen or not.
+     */
+    private static boolean canSnapshot = true;
+
+    /**
+     * The component mouse coordinates are relative to, may be null.
+     */
+    private Component owner;
+
+    /**
+     * The contents of the popup.
+     */
+    private Component contents;
+
+    /**
+     * The desired x and y location of the popup.
+     */
+    private int x, y;
+
+    /**
+     * The real popup. The #show() and #hide() methods will delegate
+     * all calls to these popup.
+     */
+    private Popup popup;
+
+    /**
+     * The border of the contents' parent replaced by SHADOW_BORDER.
+     */
+    private Border oldBorder;
+
+    /**
+     * The old value of the opaque property of the contents' parent.
+     */
+    private boolean oldOpaque;
+
+    /**
+     * The heavy weight container of the popup contents, may be null.
+     */
+    private Container heavyWeightContainer;
+
+    /**
+     * Returns a previously used &lt;code&gt;ShadowPopup&lt;/code&gt;, or a new one
+     * if none of the popups have been recycled.
+     */
+    static Popup getInstance(Component owner, Component contents, int x,
+            int y, Popup delegate) {
+        ShadowPopup result;
+        synchronized (ShadowPopup.class) {
+            if (cache == null) {
+                cache = new ArrayList(MAX_CACHE_SIZE);
+            }
+            if (cache.size() &gt; 0) {
+                result = (ShadowPopup) cache.remove(0);
+            } else {
+                result = new ShadowPopup();
+            }
+        }
+        result.reset(owner, contents, x, y, delegate);
+        return result;
+    }
+
+    /**
+     * Recycles the ShadowPopup.
+     */
+    private static void recycle(ShadowPopup popup) {
+        synchronized (ShadowPopup.class) {
+            if (cache.size() &lt; MAX_CACHE_SIZE) {
+                cache.add(popup);
+            }
+        }
+    }
+    
+    public static boolean canSnapshot() {
+        return canSnapshot;
+    }
+
+    /** {@inheritDoc} */
+    public void hide() {
+        JComponent parent = (JComponent) contents.getParent();
+        popup.hide();
+        if (parent.getBorder() == SHADOW_BORDER) {
+            parent.setBorder(oldBorder);
+            parent.setOpaque(oldOpaque);
+            oldBorder = null;
+            if (heavyWeightContainer != null) {
+                parent.putClientProperty(ShadowPopupFactory.PROP_HORIZONTAL_BACKGROUND, null);
+                parent.putClientProperty(ShadowPopupFactory.PROP_VERTICAL_BACKGROUND, null);
+                heavyWeightContainer = null;
+            }
+        }
+        owner = null;
+        contents = null;
+        popup = null;
+        recycle(this);
+    }
+
+    /** {@inheritDoc} */
+    public void show() {
+        if (heavyWeightContainer != null) {
+            snapshot();
+        }
+        popup.show();
+    }
+
+    /**
+     * Reinitializes this ShadowPopup using the given parameters.
+     * 
+     * @param owner component mouse coordinates are relative to, may be null
+     * @param contents the contents of the popup
+     * @param x the desired x location of the popup
+     * @param y the desired y location of the popup
+     * @param popup the popup to wrap
+     */
+    private void reset(Component owner, Component contents, int x, int y,
+            Popup popup) {
+        this.owner = owner;
+        this.contents = contents;
+        this.popup = popup;
+        this.x = x;
+        this.y = y;
+        if (owner instanceof JComboBox) {
+            return;
+        }
+        Container mediumWeightContainer = null;
+        for(Container p = contents.getParent(); p != null; p = p.getParent()) {
+            if (p instanceof JWindow) {
+                // Workaround for the gray rect problem.
+                p.setBackground(contents.getBackground());
+                heavyWeightContainer = p;
+                break;
+            } else if (p instanceof Panel) {
+                // It is medium weight. Setting background
+                // to a transparent color makes it transparent and
+                // we don't need to capture the screen background.
+                Color bg = p.getBackground();
+                int rgba = contents.getBackground().getRGB() &amp; 0x00ffffff;
+                if ((bg == null) || (bg.getRGB() != rgba)) {
+                    p.setBackground(new Color(rgba, true));
+                }
+                mediumWeightContainer = p;
+                break;
+            }
+        }
+        JComponent parent = (JComponent) contents.getParent();
+        oldOpaque = parent.isOpaque();
+        oldBorder = parent.getBorder();
+        parent.setOpaque(false);
+        parent.setBorder(SHADOW_BORDER);
+        // Pack it because we have changed the border.
+        if (mediumWeightContainer != null) {
+            mediumWeightContainer.setSize(
+                    mediumWeightContainer.getPreferredSize());
+        } else {
+            parent.setSize(parent.getPreferredSize());
+        }
+    }
+
+    /**
+     * The 'scratch pad' objects used to calculate dirty regions of
+     * the screen snapshots.
+     * 
+     * @see #snapshot()
+     */
+    private static final Point point = new Point();
+    private static final Rectangle rect = new Rectangle();
+
+    /**
+     * Snapshots the background. The snapshots are stored as client
+     * properties of the contents' parent. The next time the border is drawn,
+     * this background will be used.&lt;p&gt;
+     * 
+     * Uses a robot on the default screen device to capture the screen
+     * region under the drop shadow. Does &lt;em&gt;not&lt;/em&gt; use the window's
+     * device, because that may be an outdated device (due to popup reuse)
+     * and the robot's origin seems to be adjusted with the default screen
+     * device.
+     * 
+     * @see #show()
+     * @see com.jgoodies.looks.common.ShadowPopupBorder
+     */
+    private void snapshot() {
+        try {
+            Robot robot = new Robot(); // uses the default screen device
+
+            Dimension size = heavyWeightContainer.getPreferredSize();
+            int width = size.width;
+            int height = size.height;
+
+            rect.setBounds(x, y + height - SHADOW_SIZE, width, SHADOW_SIZE);
+            BufferedImage hShadowBg = robot.createScreenCapture(rect);
+
+            rect.setBounds(x + width - SHADOW_SIZE, y, SHADOW_SIZE,
+                    height - SHADOW_SIZE);
+            BufferedImage vShadowBg = robot.createScreenCapture(rect);
+
+            JComponent parent = (JComponent) contents.getParent();
+            parent.putClientProperty(ShadowPopupFactory.PROP_HORIZONTAL_BACKGROUND, hShadowBg);
+            parent.putClientProperty(ShadowPopupFactory.PROP_VERTICAL_BACKGROUND, vShadowBg);
+
+            Container layeredPane = getLayeredPane();
+            if (layeredPane == null) {
+                // This could happen if owner is null.
+                return;
+            }
+
+            int layeredPaneWidth = layeredPane.getWidth();
+            int layeredPaneHeight = layeredPane.getHeight();
+
+            point.x = x;
+            point.y = y;
+            SwingUtilities.convertPointFromScreen(point, layeredPane);
+
+            // If needed paint dirty region of the horizontal snapshot.
+            rect.x = point.x;
+            rect.y = point.y + height - SHADOW_SIZE;
+            rect.width = width;
+            rect.height = SHADOW_SIZE;
+
+            if ((rect.x + rect.width) &gt; layeredPaneWidth) {
+                rect.width = layeredPaneWidth - rect.x;
+            }
+            if ((rect.y + rect.height) &gt; layeredPaneHeight) {
+                rect.height = layeredPaneHeight - rect.y;
+            }
+            if (!rect.isEmpty()) {
+                Graphics g = hShadowBg.createGraphics();
+                g.translate(-rect.x, -rect.y);
+                g.setClip(rect);
+                boolean doubleBuffered = layeredPane.isDoubleBuffered();
+                if(layeredPane instanceof JComponent) {
+                  ((JComponent)layeredPane).setDoubleBuffered(false);                
+                  layeredPane.paint(g);
+                  ((JComponent)layeredPane).setDoubleBuffered(doubleBuffered);
+                }
+                g.dispose();
+            }
+
+            // If needed paint dirty region of the vertical snapshot.
+            rect.x = point.x + width - SHADOW_SIZE;
+            rect.y = point.y;
+            rect.width = SHADOW_SIZE;
+            rect.height = height - SHADOW_SIZE;
+
+            if ((rect.x + rect.width) &gt; layeredPaneWidth) {
+                rect.width = layeredPaneWidth - rect.x;
+            }
+            if ((rect.y + rect.height) &gt; layeredPaneHeight) {
+                rect.height = layeredPaneHeight - rect.y;
+            }
+            if (!rect.isEmpty()) {
+                Graphics g = vShadowBg.createGraphics();
+                g.translate(-rect.x, -rect.y);
+                g.setClip(rect);
+                boolean doubleBuffered = layeredPane.isDoubleBuffered();
+                if(layeredPane instanceof JComponent) {
+                  ((JComponent)layeredPane).setDoubleBuffered(false);                
+                  layeredPane.paint(g);
+                  ((JComponent)layeredPane).setDoubleBuffered(doubleBuffered);
+                }
+                g.dispose();
+            }
+        } catch (AWTException e) {
+            canSnapshot = false;
+        } catch (SecurityException e) {
+            canSnapshot = false;
+        }
+    }
+
+    /**
+     * @return the top level layered pane which contains the owner.
+     */
+    private Container getLayeredPane() {
+        // The code below is copied from PopupFactory#LightWeightPopup#show()
+        Container parent = null;
+        if (owner != null) {
+            parent = owner instanceof Container
+                    ? (Container) owner 
+                    : owner.getParent();
+        }
+        // Try to find a JLayeredPane and Window to add 
+        for (Container p = parent; p != null; p = p.getParent()) {
+            if (p instanceof JRootPane) {
+                if (p.getParent() instanceof JInternalFrame) {
+                    continue;
+                }
+                parent = ((JRootPane)p).getLayeredPane();
+                // Continue, so that if there is a higher JRootPane, we'll
+                // pick it up.
+            } else if(p instanceof Window) {
+                if (parent == null) {
+                    parent = p;
+                }
+                break;
+            } else if (p instanceof JApplet) {
+                // Painting code stops at Applets, we don't want
+                // to add to a Component above an Applet otherwise
+                // you'll never see it painted.
+                break;
+            }
+        }
+        return (Container) parent;
+    }
+
+}
+--- NEW FILE: looks-1.3.1-patched.jar ---
+(This appears to be a binary file; contents omitted.)
+
+--- looks-1.3.1.jar DELETED ---
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000000.html">[Tvbrowser-looks-cvs] develop01/src/main/jgoodieslooksplugin ComboBoxLafRenderer.java,1.2,1.3 JGoodiesLooksPlugin.java,1.5,1.6 ComboBoxThemeRenderer.java,1.2,1.3 ConfigureTab.java,1.6,1.7 Resources.java,1.6,1.7 Configuration.java,1.6,1.7 LabelListCellRenderer.java,1.4,1.5
+</A></li>
+	<LI>Next message: <A HREF="000002.html">[Tvbrowser-looks-cvs] develop01/src/main/jgoodieslooksplugin Resources.java,1.7,1.8
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1">[ date ]</a>
+              <a href="thread.html#1">[ thread ]</a>
+              <a href="subject.html#1">[ subject ]</a>
+              <a href="author.html#1">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/tvbrowser-looks-cvs">More information about the Tvbrowser-looks-cvs
+mailing list</a><br>
+</body></html>
